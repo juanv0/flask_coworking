@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Reservar</h1>
+
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.fecha.label }}<br>
+        {{ form.fecha(class='datepicker') }}
+        {% for error in form.fecha.errors %}
+        <span style="color:red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.hour.label }}<br>
+        {{ form.hour(size=32) }}
+        {% for error in form.hour.errors %}
+        <span style="color:red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.numero.label }}<br>
+        {{ form.numero(size=32) }}
+        {% for error in form.numero.errors %}
+        <span style="color:red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit() }}</p>
+    </form>
+{% if salas %}
+
+<table>
+   <caption>Usted tiene reservadas las siguientes salas:</caption>
+
+    <tr>
+       <th>Numero de Sala</th>
+       <th>Fecha</th>
+       <th>Hora</th>
+
+   </tr>
+    {% for sala in salas%}
+    <tr>
+       <td>{{ sala.numero }}</td>
+       <td>{{ sala.fecha }}</td>
+       <td>{{ sala.hora }}</td>
+   </tr>
+    {% endfor %}
+
+</table>
+{% else %}
+<h3>No tiene ninguna sala reservada</h3>
+
+{% endif %}
+{% endblock %}
